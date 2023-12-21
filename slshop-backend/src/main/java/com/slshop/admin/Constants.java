@@ -8,4 +8,5 @@ public class Constants {
     // pagination
     public static final int PAGE_INDEX = 1;
     public static final int PAGE_SIZE = 10;
+    
 }
