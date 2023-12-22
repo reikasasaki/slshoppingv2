@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  th:replace="~{layouts/base :: layout(~{::title}, ~{}, ~{}, ~{::body/content()})}"
+>
+<head>
+  <title>TOP</title>
+</head>
+<body>
+  <!-- Contents -->
+  <section class="py-5">
+    <div class="text-center container">
+      <div class="row">
+        <h1 class="fw-light">カート内は空です</h1>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

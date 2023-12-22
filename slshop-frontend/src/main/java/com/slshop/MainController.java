@@ -15,4 +15,9 @@ public class MainController {
     public String viewLoginPage() {
         return "login";
     }
+    
+    @GetMapping("/cart")
+    public String cartItem() {
+    	return "cart";
+    }
 }
