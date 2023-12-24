@@ -8,4 +8,8 @@ import com.slshop.common.entity.CartItem;
 public interface CartItemMapper {
 	
 	public void insert(CartItem cartItem);
+	
+	public CartItem findItem(Long customerId,Long productId);
+	
+	public void update(CartItem cartItem);
 }

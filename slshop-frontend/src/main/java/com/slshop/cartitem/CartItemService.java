@@ -28,4 +28,16 @@ public class CartItemService {
 		cartItem.setQuantity(quantity);
 		this.cartItemMapper.insert(cartItem);
 	}
+	
+	public void update(Long customerId,Long productId,Integer quantity) {
+		CartItem cartItem = new CartItem();
+		cartItem.setCustomer(this.customerMapper.findById(customerId));
+		cartItem.setProduct(this.productMapper.findById(productId));
+		cartItem.setQuantity(quantity);
+		this.cartItemMapper.update(cartItem);
+	}
+
+	public CartItem findItem(Long customerId,Long productId) {
+		return this.cartItemMapper.findItem(customerId, productId);
+	}
 }

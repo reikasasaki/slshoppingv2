@@ -9,23 +9,45 @@
 		type="com.slshop.common.entity.CartItem">
 		<id column="ID" property="id" />
 		<result column="QUANTITY" property="quantity" />
+		<result column="" property="quantity" />
 		<association property="customer"
 			javaType="com.slshop.common.entity.Customer">
-			<id column="CU_ID" property="id" />
+			<id column="CUSTOMER_ID" property="id" />
 		</association>
 		<association property="product"
-			javaType="com.slshop.common.entity.Product">
-			<id column="P_ID" property="id" />
+			javaType="com.slshop.common.entity.product.Product">
+			<id column="PRODUCT_ID" property="id" />
 		</association>
 	</resultMap>
 
 
 	<insert id="insert" useGeneratedKeys="true" keyColumn="ID">
 		INSERT
-		INTO CART_ITEMS (ID, CUSTOMER_ID AS CU_ID, PRODUCT_ID AS P_ID,
+		INTO CART_ITEMS (ID, CUSTOMER_ID, PRODUCT_ID,
 		QUANTITY) VALUES
-		(CART_ITEMS_ID_SEQ.nextval, #{customerId},
-		#{productId}, #{quantity})
+		(CART_ITEMS_ID_SEQ.nextval, #{customer.id},
+		#{product.id}, #{quantity})
 	</insert>
+	
+	<select id="findItem" resultMap="cartItemMap">
+		SELECT
+		ID,QUANTITY
+		FROM
+		CART_ITEMS
+		WHERE
+		CUSTOMER_ID = #{customerId}
+		AND
+		PRODUCT_ID = #{productId}
+	</select>
 
+	<update id="update">
+		UPDATE
+		CART_ITEMS
+		SET
+		QUANTITY = #{quantity}
+		WHERE
+		CUSTOMER_ID = #{customer.id}
+		AND
+		PRODUCT_ID = #{product.id}
+	</update>
 </mapper>

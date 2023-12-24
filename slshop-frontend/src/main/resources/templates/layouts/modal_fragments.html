@@ -10,11 +10,11 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modalTitle">モーダルのタイトル</h1>
+          <h1 class="modal-title fs-5" id="modalTitle" th:if="${modal != null}" th:text="${modal.title}">モーダルのタイトル</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
         </div>
         <div class="modal-body">
-          <p id="modalBody">モーダルのコンテンツ</p>
+          <p id="modalBody" th:if="${modal != null}" th:text="${modal.message}">モーダルのコンテンツ</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>

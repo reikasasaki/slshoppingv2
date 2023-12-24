@@ -33,7 +33,7 @@
 							<button type="button" class="btn btn-secondary" id="plus">
 								<i class="bi bi-plus"></i>
 							</button>
-							<button class="btn btn-outline-primary flex-shrink-0 ms-4" type="submit">
+							<button class="btn btn-outline-primary flex-shrink-0 ms-4" id="submit" type="submit">
 								<i class="bi-cart-fill me-1"></i>
 								カートに追加
 							</button>
@@ -60,23 +60,10 @@
 		</div>
 	</section>
 	<th:block th:replace="~{layouts/modal_fragments :: messageModal}" />
-	<script>
-		let el = document.getElementById("number");
-		let del = document.getElementById("dash");
-		let add = document.getElementById("plus");
-
-		del.addEventListener("click", function () {
-			if (el.value > parseInt(el.min)) {
-				el.value = parseInt(el.value) - 1;
-			}
-		});
-
-		add.addEventListener("click", function () {
-			if (el.value < parseInt(el.max)) {
-				el.value = parseInt(el.value) + 1;
-			}
-		});
-	</script>
+	
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/button.js}"></script>
+<script th:if="${modal != null}" th:src="@{/js/modal.js}"></script>
 </body>
 
 </html>
