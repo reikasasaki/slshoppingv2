@@ -10,4 +10,6 @@ import com.slshop.common.entity.Customer;
 public interface CustomerMapper {
     Optional<Customer> findByEmail(String email);
     
+    Customer findById(Long id);
+    
 }

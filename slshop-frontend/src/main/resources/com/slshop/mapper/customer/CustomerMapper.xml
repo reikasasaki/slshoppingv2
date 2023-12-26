@@ -23,4 +23,16 @@
         WHERE
             EMAIL = #{email}
     </select>
+    
+    <select id="findById" resultMap="customerMap">
+        SELECT
+            ID,
+            EMAIL,
+            FIRST_NAME,
+            LAST_NAME,
+            PASSWORD
+        FROM CUSTOMERS
+        WHERE
+            ID = #{id}
+    </select>
 </mapper>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -11,6 +12,8 @@
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 <!-- Custom Styles -->
 <link th:href="@{/css/sign-in.css}" rel="stylesheet" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+
 </head>
 <body class="text-center">
   <main class="form-signin">
@@ -35,6 +38,10 @@
       </div>
       <button class="w-100 btn btn-lg btn-primary" type="submit">ログイン</button>
     </form>
+      <th:block th:replace="~{layouts/modal_fragments :: messageModal}" />
   </main>
 </body>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:if="${modal != null}" th:src="@{/js/modal.js}"></script>
 </html>

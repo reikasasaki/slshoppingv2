@@ -27,10 +27,13 @@
 
   <th:block th:replace="~{layouts/navigation :: footer}" />
 
+<script th:src="@{/js/button.js}"></script>
+
   <!-- Bootstrap core JavaScript -->
   <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
   <!-- Custom scripts and plugins for all pages -->
+  <script th:if="${modal != null}" th:src="@{/js/modal.js}"></script>
 
   <!-- Page level custom scripts and plugins -->
   <script th:if="${scripts != null}" th:replace="${scripts}"></script>
