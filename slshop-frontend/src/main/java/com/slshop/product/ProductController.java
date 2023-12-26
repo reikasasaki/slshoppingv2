@@ -1,4 +1,5 @@
 package com.slshop.product;
+package com.slshop.common;
 
 import java.util.List;
 
@@ -50,11 +51,6 @@ public class ProductController {
 		model.addAttribute("product", product);
 		Modal modalval = (Modal) modal.get("modal");
 		model.addAttribute("modal", modalval);
-		//        
-		//        Modal aaa = new Modal();
-		//        aaa.setTitle("サンプルで作成_ゆうじ");
-		//        aaa.setMessage("サンプルメッセージ_ゆうじ");
-		//        model.addAttribute("modal", aaa);
 		return "products/product_detail";
 	}
 
