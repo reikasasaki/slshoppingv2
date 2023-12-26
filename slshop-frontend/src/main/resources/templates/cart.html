@@ -1,20 +1,78 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-  th:replace="~{layouts/base :: layout(~{::title}, ~{}, ~{}, ~{::body/content()})}"
->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	th:replace="~{layouts/base :: layout(~{::title}, ~{}, ~{}, ~{::body/content()})}">
+
 <head>
-  <title>TOP</title>
+	<title>カート</title>
+	<link th:href="@{/css/button.css}" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-  <!-- Contents -->
-  <section class="py-5">
-    <div class="text-center container">
-      <div class="row">
-        <h1 class="fw-light">カート内は空です</h1>
-      </div>
-    </div>
-  </section>
+	<!-- Contents -->
+	<section class="py-5">
+		<div class="text-center container">
+			<div class="row">
+				<table class="table align-middle">
+					<thead>
+						<tr class="text-center">
+							<th></th>
+							<th>ID</th>
+							<th style="width:20%">商品画像</th>
+							<th>商品名</th>
+							<th>単価</th>
+							<th>数量</th>
+							<th>小計</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-center" th:if="${not #lists.isEmpty(cartItems)}"
+							th:each="cartItem, stat : ${cartItems}">
+							<form th:id="'form' + ${stat.index}" th:data-index="${stat.index}"
+								oninput="updateResult(this.getAttribute('data-index'))">
+								<td>
+									<form th:action="@{/cart/delete/{id}(id=${cartItem.product.id})}" th:method="post">
+										<input type="submit" value="削除">
+									</form>
+								</td>
+								<td>[[${cartItem.product.id}]]</td>
+								<td>
+									<img class="img-fluid mx-auto d-block" th:src="@{${cartItem.product.imagePath}}">
+								</td>
+								<td>[[${cartItem.product.name}]]</td>
+								<td th:id="'price' + ${stat.index}">[[${cartItem.product.price}]]</td>
+								<td th:id="'quantity' + ${stat.index}">
+									<div class="d-flex input-group">
+										<button type="button" class="btn btn-secondary" id="dash">
+											<i class="bi bi-dash"></i>
+										</button>
+										<!-- quantity の変更に対するイベントリスナーを追加 -->
+										<input type="number" class="form-control text-center" min="1" max="10"
+											id="number" name="quantity" th:value="${cartItem.quantity}" readonly
+											onchange="updateResult(this.getAttribute('data-index'))" />
+										<button type="button" class="btn btn-secondary" id="plus">
+											<i class="bi bi-plus"></i>
+										</button>
+									</div>
+								</td>
+								<td>
+									<!-- 小計を表示する要素 -->
+									<span th:text="${cartItem.product.price * cartItem.quantity}"></span>
+								</td>
+							</form>
+						</tr>
+						<tr th:unless="${not #lists.isEmpty(cartItems)}">
+							<h1 class="fw-light">カートは空です</h1>
+							<!-- 必要に応じて列の数を調整 -->
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</section>
+	<script th:src="@{/js/calculation.js}"></script>
+	<script th:src="@{/js/button.js}"></script>
 </body>
+
 </html>
