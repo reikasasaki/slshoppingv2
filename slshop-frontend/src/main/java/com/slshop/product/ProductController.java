@@ -1,5 +1,4 @@
 package com.slshop.product;
-package com.slshop.common;
 
 import java.util.List;
 
