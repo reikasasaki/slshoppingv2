@@ -29,9 +29,9 @@ public class CartItemController {
 			@AuthenticationPrincipal CustomerUserDetails customerUserDetails) {
 		Long customerId = customerUserDetails.getCustomer().getId();
 		List<CartItem> cartItems = this.cartItemService.findAll(customerId);
-//		Integer sum = this.cartItemService.sum(customerId);
+		Integer sum = this.cartItemService.sum(customerId);
 		model.addAttribute("cartItems", cartItems);
-//		model.addAttribute("sum", sum);
+		model.addAttribute("sum", sum);
 		return "cart";
 	}
 	

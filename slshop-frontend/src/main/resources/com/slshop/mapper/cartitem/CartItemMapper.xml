@@ -71,12 +71,12 @@
 		CI.CUSTOMER_ID = #{customerId}
 	</select>
 
-<!--	<select id="sum" resultMap="cartItemMap">-->
-<!--		SELECT SUM(CI.QUANTITY * P.PRICE) AS SUBTOTAL-->
-<!--		FROM CART_ITEMS CI-->
-<!--		INNER JOIN PRODUCTS P ON CI.PRODUCTS_ID = P.ID-->
-<!--		WHERE CI.CUSTOMER_ID = #{customerId};-->
-<!--	</select>-->
+	<select id="sum" resultType="java.lang.Integer">
+		SELECT SUM(CI.QUANTITY * P.PRICE) AS SUBTOTAL
+		FROM CART_ITEMS CI
+		INNER JOIN PRODUCTS P ON CI.PRODUCT_ID = P.ID
+		WHERE CI.CUSTOMER_ID = #{customerId}
+	</select>
 
 	<delete id="deletedById">
 		DELETE

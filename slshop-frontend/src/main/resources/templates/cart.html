@@ -27,7 +27,7 @@
 					</thead>
 					<tbody>
 						<tr class="text-center" th:if="${not #lists.isEmpty(cartItems)}"
-							th:each="cartItem : ${cartItems}">
+							th:each="cartItem, rowStatus : ${cartItems}">
 								<td>
 									<form th:action="@{/cart/delete/{id}(id=${cartItem.product.id})}" th:method="post">
 										<input type="submit" value="削除">
@@ -38,7 +38,7 @@
 									<img class="img-fluid mx-auto d-block" th:src="@{${cartItem.product.imagePath}}">
 								</td>
 								<td>[[${cartItem.product.name}]]</td>
-								<td th:id="price">[[${cartItem.product.price}]]</td>
+								<td class="price" th:id="price">[[${cartItem.product.price}]]</td>
 								<td th:id="quantity">
 									<div class="d-flex input-group">
 										<button type="button" class="btn btn-secondary" 
@@ -47,8 +47,7 @@
 										</button>
 										<!-- quantity の変更に対するイベントリスナーを追加 -->
 										<input type="number" class="form-control text-center" min="1" max="10"
-											id="plus" name="quantity" th:value="${cartItem.quantity}" readonly
-											/>
+											 name="quantity" th:value="${cartItem.quantity}" readonly/>
 										<button type="button" class="btn btn-secondary" 
 										 id="increment_${cartItem.product.id}">
 											<i class="bi bi-plus"></i>
@@ -57,7 +56,7 @@
 								</td>
 								<td>
 									<!-- 小計を表示する要素 -->
-									<span th:text="${cartItem.product.price * cartItem.quantity}"></span>
+									<span class="subtotal"th:id="'subtotal_' + ${rowStatus.index}">[[${cartItem.product.price * cartItem.quantity}]]</span>
 								</td>
 						</tr>
 						<tr th:unless="${not #lists.isEmpty(cartItems)}">
@@ -66,7 +65,7 @@
 						</tr>
 					</tbody>
 				</table>
-
+				<span class="sum"><h1 class="fw-light" th:text="合計 + ${sum} + 円"></h1></span>
 			</div>
 		</div>
 	</section>

@@ -18,6 +18,6 @@ public interface CartItemMapper {
 	public List<CartItem> findAll(Long customerId);
 	
 	public void deletedById(Long productId);
-//	
-//	public Integer sum(Long customerId);
+	
+	public Integer sum(Long customerId);
 }

@@ -51,7 +51,7 @@ public class CartItemService {
 		this.cartItemMapper.deletedById(productId);
 	}
 	
-//	public Integer sum(Long customerId) {
-//		return this.cartItemMapper.sum(customerId);
-//	}
+	public Integer sum(Long customerId) {
+		return this.cartItemMapper.sum(customerId);
+	}
 }
