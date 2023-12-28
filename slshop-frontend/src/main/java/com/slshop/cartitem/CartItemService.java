@@ -1,5 +1,7 @@
 package com.slshop.cartitem;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +41,17 @@ public class CartItemService {
 
 	public CartItem findItem(Long customerId,Long productId) {
 		return this.cartItemMapper.findItem(customerId, productId);
+	}
+	
+	public List<CartItem> findAll(Long customerId) {
+		return this.cartItemMapper.findAll(customerId);
+	}
+	
+	public void deletedById(Long productId) {
+		this.cartItemMapper.deletedById(productId);
+	}
+	
+	public Integer sum(Long customerId) {
+		return this.cartItemMapper.sum(customerId);
 	}
 }

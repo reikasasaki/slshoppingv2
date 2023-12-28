@@ -22,11 +22,11 @@ public class MainController {
     	model.addAttribute("modal",modalval);
         return "login";
     }
-    
-    @GetMapping("/cart")
-    public String cartItem() {
-    	return "cart";
-    }
+//    
+//    @GetMapping("/cart")
+//    public String cartItem() {
+//    	return "cart";
+//    }
     
    
 }
