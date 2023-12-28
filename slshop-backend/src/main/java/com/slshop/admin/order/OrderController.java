@@ -22,6 +22,7 @@ public class OrderController {
 	
 	@GetMapping
 	public String orderPage(Model model) {
+		List<Order> orders = this.orderService.findAll();
 		model.addAttribute("orders", orders);
 		return "orders";
 	}
