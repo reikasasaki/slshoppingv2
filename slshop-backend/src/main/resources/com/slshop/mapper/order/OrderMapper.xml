@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.slshop.admin.order.OrderMapper">
+    <resultMap type="com.slshop.common.entity.order.Order" id="orderMap">
+    	<id column="ID" property="id" />
+    	<result column="ORDER_TIME" property="orderTime"/>
+    	<result column="TOTAL" property="total"/>
+    	<result column="PAYMENT_METHOD" property="paymentMethod" />
+    	<result column="STATUS" property="status" />
+    	<association property="customer"
+    		javaType="com.slshop.common.entity.Customer">
+    		<id column="CUSTOMER_ID" property="id"/>
+    		<result column="FIRST_NAME" property="firstName" />
+    		<result column="LAST_NAME" property="lastName" />
+    	</association>
+    	<association property="address" javaType="com.slshop.common.entity.Address">
+    		<id column="AD_ID" property="id"/>
+    		<result column="ADDRESS_LINE_1" property="addressLine1" />
+    	</association>
+    </resultMap>
+    
+    <select id="findAll" resultMap="orderMap">
+    	SELECT
+    		O.ID,
+    		CU.FIRST_NAME,
+    		CU.LAST_NAME,
+    		O.ORDER_TIME,
+    		O.PAYMENT_METHOD,
+    		O.STATUS,
+    		O.TOTAL,
+    		AD.ADDRESS_LINE_1
+    	FROM
+    		ORDERS O
+    	INNER JOIN
+    		CUSTOMERS CU
+    	ON
+    		O.CUSTOMER_ID = CU.ID
+    	INNER JOIN
+    		ADDRESSES AD
+    	ON
+    		CU.ID = AD.CUSTOMER_ID
+    
+    </select>
+</mapper>

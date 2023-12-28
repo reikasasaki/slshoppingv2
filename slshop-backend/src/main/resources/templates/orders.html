@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  th:replace="~{layouts/base :: layout(~{::title}, ~{}, ~{}, ~{::body/content()})}"
+>
+<head>
+    <title>受注一覧</title>
+</head>
+<body>
+    <main>
+      <div class="container-fluid">
+        <h1 class="py-4">受注一覧</h1>
+    </main>
+    <section class="py-5">
+		<div class="text-center container">
+			<div class="d-flex flex-row mb-3">
+				<table class="table align-middle">
+					<thead class="table-light">
+						<tr class="text-center">
+							<th></th>
+							<th>ID</th>
+							<th>名前</th>
+							<th>注文日時</th>
+							<th>支払方法</th>
+							<th>対応状況</th>
+							<th>購入金額</th>
+							<th>お届け先</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-center " th:each="order : ${orders}">
+								<td>[[${order.id}]]</td>
+								<td>[[${order.customer.lastName}]]+[[${order.customer.firstaName}]]</td>
+								<td>[[${order.orderTime}]]</td>
+								<td>[[${order.paymentMethod}]]</td>
+								<td>[[${order.status}]]</td>
+								<td>[[${order.total}]]</td>
+								<td>[[${order.customer.address.addressLine1}]]</td>
+								<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
