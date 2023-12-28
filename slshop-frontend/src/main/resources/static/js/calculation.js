@@ -2,14 +2,7 @@
  * 
  */
 
-//function updateResult(index) {
-//        var price = document.getElementById("price" + index).textContent;
-//        var quantity = document.getElementById("quantity" + index).value;
-//        var resultElement = document.getElementById("result" + index);
-//
-//        var result = parseFloat(price) * parseInt(quantity);
-//        resultElement.textContent = result;
-//    
+
 window.onload = function() {
 
     var buttons = document.querySelectorAll('.btn-secondary');
@@ -46,22 +39,6 @@ window.onload = function() {
     });
 };
 
-
-//    function updateSubtotal(rowNumber) {
-//        var parentTrs = document.querySelectorAll('.text-center');
-//        var tr = parentTrs[rowNumber];
-//        var quantityInput = tr.querySelector('.form-control');
-//        var priceElement = tr.querySelector('#price');
-//        var subtotalElement = tr.querySelector('#subtotal_' + rowNumber);
-//
-//        var quantity = parseInt(quantityInput.value);
-//        var price = parseFloat(priceElement.textContent);
-//        var subtotal = quantity * price;
-//
-//        // 小数点以下を表示させないように整数に変換
-//        subtotalElement.textContent = Math.round(subtotal);
-//    }
-//}
 
 
 

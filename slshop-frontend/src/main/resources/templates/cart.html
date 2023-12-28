@@ -11,9 +11,9 @@
 	<!-- Contents -->
 	<section class="py-5">
 		<div class="text-center container">
-			<div class="row">
+			<div class="d-flex flex-row mb-3">
 				<table class="table align-middle">
-					<thead>
+					<thead class="table-light">
 						<tr class="text-center">
 							<th></th>
 							<th>ID</th>
@@ -30,7 +30,8 @@
 							th:each="cartItem, rowStatus : ${cartItems}">
 								<td>
 									<form th:action="@{/cart/delete/{id}(id=${cartItem.product.id})}" th:method="post">
-										<input type="submit" value="削除">
+										<button class="btn btn-danger" id="submit" type="submit">
+											<i class="bi bi-trash"></i>
 									</form>
 								</td>
 								<td>[[${cartItem.product.id}]]</td>
@@ -65,7 +66,17 @@
 						</tr>
 					</tbody>
 				</table>
-				<span ><h1 class="fw-light sum" th:text="合計 + ${sum} + 円"></h1></span>
+				<div class="row">
+					<div class="col-9"><h2>カート合計</h2></div>
+					<div class="col-9">
+						<h4 class="fw-light sum" th:text="合計  + ${sum} + 円"></h4>
+					</div>
+					<div>
+					<button class="btn btn-primary flex-shrink-0 ms-4" id="submit" type="submit">
+					レジに進む</button>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</section>
