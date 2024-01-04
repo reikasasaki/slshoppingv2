@@ -15,11 +15,14 @@
     		<id column="CUSTOMER_ID" property="id"/>
     		<result column="FIRST_NAME" property="firstName" />
     		<result column="LAST_NAME" property="lastName" />
+    		<association property="address" javaType="com.slshop.common.entity.Address">
+    			<id column="AD_ID" property="id"/>
+    			<result column="STATE" property="state" />
+    			<result column="CITY" property="city" />
+    			<result column="ADDRESS_LINE_1" property="addressLine1" />
+    		</association>
     	</association>
-    	<association property="address" javaType="com.slshop.common.entity.Address">
-    		<id column="AD_ID" property="id"/>
-    		<result column="ADDRESS_LINE_1" property="addressLine1" />
-    	</association>
+
     </resultMap>
     
     <select id="findAll" resultMap="orderMap">
@@ -31,6 +34,8 @@
     		O.PAYMENT_METHOD,
     		O.STATUS,
     		O.TOTAL,
+    		AD.STATE,
+    		AD.CITY,
     		AD.ADDRESS_LINE_1
     	FROM
     		ORDERS O
@@ -42,6 +47,10 @@
     		ADDRESSES AD
     	ON
     		CU.ID = AD.CUSTOMER_ID
-    
+    	ORDER BY O.ID
     </select>
+      <!-- COUNTを追加 -->
+  <select id="count" resultType="Long">
+    SELECT COUNT(*) FROM ORDERS
+  </select>
 </mapper>
