@@ -13,6 +13,8 @@ public class Customer {
     private String lastName;
 
     private boolean enabled;
+    
+    private Address address;
 
     public Customer() {
     }
@@ -114,5 +116,13 @@ public class Customer {
     public String toString() {
         return "Customer [id=" + id + ", email=" + email + ", getFullName()=" + getFullName() + "]";
     }
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 }

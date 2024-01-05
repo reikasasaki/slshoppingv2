@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	th:replace="~{layouts/base :: layout(~{::title}, ~{}, ~{}, ~{::body/content()})}">
+
+<head>
+	<title>受注一覧</title>
+</head>
+
+<body>
+	<main>
+		<div class="container-fluid">
+			<h1 class="py-4">受注一覧</h1>
+	</main>
+	<section class="py-5">
+		<div class="text-center container">
+			<div class="d-flex flex-row mb-3">
+				<table class="table align-middle">
+					<thead class="table-light">
+						<tr class="text-center">
+							<th>ID</th>
+							<th>名前</th>
+							<th>注文日時</th>
+							<th>支払方法</th>
+							<th>対応状況</th>
+							<th>購入金額</th>
+							<th>お届け先</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-center " th:each="order : ${orders}">
+							<td>[[${order.id}]]</td>
+							<td>[[${order.customer.lastName}]][[${order.customer.firstName}]]</td>
+							<td>[[*{#temporals.format(order.orderTime, 'yyyy/MM/dd HH:mm')}]]</td>
+							<td>[[${order.paymentMethod.getJpText()}]]</td>
+							<td>[[${order.status.getJpText()}]]</td>
+							<td>[[${order.total}]]</td>
+							<td>[[${order.customer.address.state}]]
+								[[${order.customer.address.city}]]
+								[[${order.customer.address.addressLine1}]]</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+				<!-- 中央揃えにするためスタイル追加 -->
+				<div style="display:inline-block">
+		
+					<ul class="pagination">
+						<!--  Firstボタン　最初以外は押せる-->
+						<li class="page-item disabled"th:if="${page.first}">
+							<a class="page-link" th:href="@{/orders/(page = 0)}">
+								First
+							</a>
+						</li>
+						<li class="page-item"th:if="${!page.first}" >
+							<a class="page-link" th:href="@{/orders/(page = 0)}">
+								First
+							</a>
+						</li>
+						<!-- 前ボタン 最初以外は前にを押せるように -->
+						<li class="page-item" >
+							<a class="page-link" th:if="${!page.first}" th:href="@{/orders/(page = ${page.number} - 1)}">
+								Previous
+							</a>
+						</li>
+						<li class="page-item disabled" >
+							<a class="page-link" th:if="${page.first}" th:href="@{/orders/(page = ${page.number} - 1)}">
+								Previous
+							</a>
+						</li>
+						<!-- ページ数ボタン　今のページ以外はクリックできるようにする -->
+						<th:block  th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+							<li class="page-item"th:if="${i} != ${page.number}" >
+								<a class="page-link" th:href="@{/orders/(page = ${i})}">
+									<span th:text="${i+1}">1</span>
+								</a>
+							</li>
+							<li class="page-item disabled" th:if="${i} == ${page.number}">
+								<a class="page-link"  th:href="@{/orders/(page = ${i})}">
+									<span th:text="${i+1}">1</span>
+								</a>
+							</li>
+						</th:block>
+						<!-- Nextボタン　今のページが最後じゃなかったら押せる-->
+						<li class="page-item">
+							<a class="page-link" th:if="${!page.last}" th:href="@{/orders/(page = ${page.number} +1 )}">
+								Next
+							</a >
+						</li>
+						<li class="page-item disabled" >
+							<a class="page-link" th:if="${page.last}" th:href="@{/orders/(page = ${page.number} +1 )}">
+								Next
+							</a >
+						</li>
+						<!-- Lastボタン　ラストの場合はクリック不可にする -->
+						<li class="page-item" th:if="${!page.last}">
+							<a class="page-link" th:href="@{/orders/(page = ${page.getTotalPages() - 1})}">
+								Last
+							</a >
+						</li>
+						<li class="page-item disabled" th:if="${page.last}">
+							<a class="page-link" th:href="@{/orders/(page = ${page.getTotalPages() - 1})}">
+								Last
+							</a >
+						</li>
+						
+					</ul>
+				</div>
+		</div>
+	</section>
+</body>
+
+</html>

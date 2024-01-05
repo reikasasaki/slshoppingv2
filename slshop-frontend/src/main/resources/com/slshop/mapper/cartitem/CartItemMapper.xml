@@ -9,7 +9,6 @@
 		type="com.slshop.common.entity.CartItem">
 		<id column="ID" property="id" />
 		<result column="QUANTITY" property="quantity" />
-		<result column="" property="quantity" />
 		<association property="customer"
 			javaType="com.slshop.common.entity.Customer">
 			<id column="CUSTOMER_ID" property="id" />
